@@ -1,0 +1,59 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Node.js CI/CD pipeline
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout repository code so that our workflow can access it 
+      - name: Checkout code 
+        uses: actions/checkout@v5
+
+      # 2. Setup a Node.js environment
+      - name: Set up Node 24
+        uses: actions/setup-node@v5
+        with: 
+          node-version: 24
+      
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Lint and test the application
+      - name: Lint and Test
+        run: |
+          npm run lint
+          npm test
+      
+      # 5. Build Docker image from your Dockerfile with the tagged name
+      - name: Build Docker Image
+        run: docker build -t "deploy-node-app-tcw" .
+
+      # 6. Optional: Login to Docker Hub and push Docker image
+      # ** Uncomment if you want to push the Docker image to Docker Hub
+      # ** Ensure you have added DOCKER_HUB_USERNAME and DOCKER_HUB_TOKEN secrets in your Github repository
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with: 
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secretse.DOCKER_HUB_TOKEN }}
+
+      - name: Push Docker image
+        run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/deploy-node-app-tcw
+        
+        
