@@ -1,22 +1,25 @@
 import js from "@eslint/js";
 import globals from "globals";
 import reactPlugin from "eslint-plugin-react";
-import { defineConfig } from "eslint/config";
 
-export default defineConfig([
+export default [
+  js.configs.recommended,
   {
     files: ["**/*.{js,mjs,cjs,jsx}"],
     plugins: {
       react: reactPlugin,
-      js,
     },
-    extends: [
-      js.configs.recommended,
-    ],
     languageOptions: {
-      globals: globals.browser,
+      globals: {
+        ...globals.node,
+        ...globals.browser,
+      },
       parserOptions: {
-        ecmaFeatures: { jsx: true },
+        ecmaVersion: "latest",
+        sourceType: "module",
+        ecmaFeatures: {
+          jsx: true,
+        },
       },
     },
     settings: {
@@ -25,8 +28,8 @@ export default defineConfig([
       },
     },
     rules: {
-      "react/prop-types": "off",
       ...reactPlugin.configs.recommended.rules,
+      "react/prop-types": "off",
     },
   },
-]);
+];
