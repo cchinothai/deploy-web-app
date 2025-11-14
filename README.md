@@ -112,6 +112,7 @@ Key Automation Features
 ✅ Dependency Caching: npm ci ensures reproducible builds from lock files
 
 📝 Environment Variables
+
 Backend:
 
 PORT - Server port (default: 4000)
@@ -166,6 +167,19 @@ docker-compose up
 # Backend: http://localhost:4000
 ```
 <img width="1918" height="1610" alt="docker desktop container" src="https://github.com/user-attachments/assets/1bb9250c-34c1-4d6b-8895-aca5f532ecd7" />
+
+🎓 Key Learnings
+
+
+1. Infrastructure as Code: Dockerfiles and compose.yaml define entire stack
+
+2. Automated Quality Checks: Tests and linting prevent bad code from deploying
+
+3. Parallel Execution: Speeds up CI/CD pipeline significantly
+
+4. Container Networking: Services communicate via Docker network in production
+
+5. Immutable Deployments: Docker images ensure consistency across environments
 
 
 
