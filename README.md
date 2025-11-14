@@ -95,6 +95,9 @@ Job: docker-build-and-push
 ├─ Push backend:latest to Docker Hub
 └─ Push frontend:latest to Docker Hub
 ```
+<img width="1349" height="813" alt="image" src="https://github.com/user-attachments/assets/d03ca18d-20e2-42a9-b1a6-d3031433f0da" />
+
+
 Key Automation Features
 ✅ Fail-Fast Testing: Backend and frontend tests run in parallel; Docker builds only if ALL tests pass
 
